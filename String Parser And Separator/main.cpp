@@ -9,4 +9,5 @@ int main(void)
 
 	parser.loadString(input);
 	parser.separateEvenOddOrderNumberWords(input, oddOrderWords, evenOrderWords);
+	parser.separateEvenOddCharacterAmountWords(input, oddOrderWords, evenOrderWords);
 }

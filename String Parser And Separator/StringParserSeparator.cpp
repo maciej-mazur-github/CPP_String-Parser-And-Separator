@@ -6,6 +6,74 @@
 using namespace std;
 
 
+void StringParserSeparator::separateEvenOddCharacterAmountWords(string sourceString, string oddWordsString, string evenWordsString)
+{
+	if (sourceString.compare("") == 0)
+	{
+		cout << "The provided source string is empty. Please use a non-empty string or use the method loadString to generate one.\n";
+		return;
+	}
+
+	int sourceIterator = 0;
+	int characterCounter = 0;
+	int sourceLength = sourceString.length();
+	string tempString;
+
+	while (sourceIterator < sourceLength)
+	{
+		while ((sourceString[sourceIterator] == 9 || sourceString[sourceIterator] == 32) && sourceIterator < sourceLength)    // if inspected source character is either space or tab; also guarded the case where inputString is full of space characters
+		{
+			sourceIterator++;
+		}
+
+		if ((sourceString[sourceIterator] >= 48 && sourceString[sourceIterator] <= 57)
+			|| (sourceString[sourceIterator] >= 65 && sourceString[sourceIterator] <= 90)
+			|| (sourceString[sourceIterator] >= 97 && sourceString[sourceIterator] <= 122))   //   to filter out only digits and all letters (lower and uppercase)
+		{
+			while (sourceString[sourceIterator] != 9 && sourceString[sourceIterator] != 32 && sourceIterator < sourceLength)  // if inspected source character is either space or tab
+			{
+				if ((sourceString[sourceIterator] >= 48 && sourceString[sourceIterator] <= 57)
+					|| (sourceString[sourceIterator] >= 65 && sourceString[sourceIterator] <= 90)
+					|| (sourceString[sourceIterator] >= 97 && sourceString[sourceIterator] <= 122))
+				{
+					tempString += sourceString[sourceIterator];
+					characterCounter++;
+				}
+
+				sourceIterator++;
+			}
+
+			tempString += " ";   // add space to separate consecutive words in output strings
+
+			if (characterCounter % 2)
+			{
+				oddWordsString += tempString;
+			}
+			else
+			{
+				evenWordsString += tempString;
+			}
+
+			characterCounter = 0;
+			tempString = "";
+		}
+		else
+		{
+			sourceIterator++;       // in case character ASCII code is not digit nor letter then it will not be saved to any of output arrays but still the sourceIterator needs to be moved on
+		}
+	}
+
+
+	cout << "\n\n***********************************************************************\n";
+	cout << "Array of words having odd amount of characters is as follows:\n\t";
+	cout << oddWordsString << endl << endl;
+
+	cout << "\nArray of words having even amount of characters is as follows:\n\t";
+	cout << evenWordsString << endl << endl;
+	cout << "***********************************************************************\n";
+}
+
+
 void StringParserSeparator::separateEvenOddOrderNumberWords(string sourceString, string oddWordsString, string evenWordsString)
 {
 	if (sourceString.compare("") == 0)
