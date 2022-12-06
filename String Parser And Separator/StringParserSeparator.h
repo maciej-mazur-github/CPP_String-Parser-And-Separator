@@ -5,7 +5,6 @@ using namespace std;
 
 class StringParserSeparator
 {
-	string* inputString;
 public:
 	void loadString(string& inputString);
 	void separateEvenOddOrderNumberWords(string sourceString, string oddWordsString, string evenWordsString);
